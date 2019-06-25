@@ -1,0 +1,33 @@
+<launch>
+    <!--Synchronization -->
+    <arg name="syncronizer_namespace" default="/stereo" />
+    <arg name="left_camera_raw" default="$(arg syncronizer_namespace)/left" />
+    <arg name="right_camera_raw" default="$(arg syncronizer_namespace)/right" />
+    <arg name="left_camera_info_topic" default="$(arg syncronizer_namespace)/left/camera_info" />
+    <arg name="right_camera_info_topic" default="$(arg syncronizer_namespace)/right/camera_info" />
+
+  <!-- stereo_image_proc parameters -->
+  <group ns="/stereo_camera">
+    <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen" >
+      <remap from="left/image_raw" to="$(arg left_camera_raw)/image_raw" />
+      <remap from="right/image_raw" to="$(arg right_camera_raw)/image_raw" />
+      <remap from="left/camera_info" to="$(arg left_camera_info_topic)" />
+      <remap from="right/camera_info" to="$(arg right_camera_info_topic)" />
+
+      <param name="approximate_sync"  value="true"/>
+      <param name="queue_size"        value="10"/>
+      <param name="disparity_range"   value="128"/>
+
+      <param name="prefilter_size"    value="35" />
+      <param name="prefilter_cap"     value="11" />
+      <param name="correlation_window_size" value="41" />
+      <param name="min_disparity"     value="-15" />
+      <param name="uniqueness_ratio"  value="0.0" />
+      <param name="texture_threshold" value="1000" />
+      <param name="speckle_size"      value="500" />
+      <param name="speckle_range"     value="16" />
+
+    </node>
+  </group>
+
+</launch>
