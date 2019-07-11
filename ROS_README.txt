@@ -9,3 +9,7 @@ rosrun image_view stereo_view stereo:=/stereo_camera image:=image_rect _approxim
 rosrun rqt_graph rqt_graph
 
 rosrun rqt_reconfigure rqt_reconfigure
+
+rosrun rviz rviz
+
+roslaunch rtabmap_ros stereo_odometry_stream_publisher.launch

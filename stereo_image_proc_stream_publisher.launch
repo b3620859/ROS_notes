@@ -30,4 +30,15 @@
     </node>
   </group>
 
+    <arg name="pi/2" value="1.5707963267948966" />
+    <arg name="optical_rotate" value="0 0 0 -$(arg pi/2) 0 -$(arg pi/2)" />
+    <node pkg="tf" type="static_transform_publisher" name="camera_base_link"
+          args="$(arg optical_rotate) base_link stereo_camera 100" />
+
+  <!-- rotate camera so z axis is up and x forward. -->
+  <!-- <arg name="pi/2" value="1.5707963267948966" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_base_link" args="0 0 0 -$(arg pi/2) 0 -$(arg pi/2) camera_link stereo/left 100" />
+ -->
+
+
 </launch>
